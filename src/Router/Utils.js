@@ -49,3 +49,12 @@ export const pathMatch = (compare, current, exact = false) => {
   current = current || getCurrentUrl() || "";
   return __pathMatching(compare, current, exact);
 };
+
+export const pollIntervalCheckingUrl = () => {
+  let __thenUrl = getCurrentUrl();
+  return () => {
+    let q = __thenUrl === getCurrentUrl();
+    if (q) __thenUrl = getCurrentUrl();
+    return q;
+  };
+};

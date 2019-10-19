@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import "./styles.css";
 import Header from "./Components/Header";
 import About from "./Components/About";
