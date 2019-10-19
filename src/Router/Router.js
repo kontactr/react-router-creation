@@ -22,7 +22,17 @@ export default class Router extends React.Component {
     );
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    if ("onpopstate" in window) {
+      window.addEventListener("popstate", this.getForceUpdate);
+    } else {
+    }
+  }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    if ("onpopstate" in window) {
+      window.removeEventListener("popstate", this.getForceUpdate);
+    } else {
+    }
+  }
 }
