@@ -1,15 +1,10 @@
 import React from "react";
-import PropTypes, { exact } from "prop-types";
+import PropTypes from "prop-types";
 import { pathMatch } from "./Utils";
-import { nullLiteral } from "@babel/types";
+import RouterContext from "./RouterContext/RouterContext";
 
 export default class Route extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   getProps = () => {
-    console.log(this.props, 111);
     let { path, render, Component, exact, url } = this.props;
     return {
       path,
@@ -21,11 +16,33 @@ export default class Route extends React.Component {
   };
 
   render() {
-    let { path, url, exact } = this.getProps();
+    let { RouterConsumer } = RouterContext;
 
-    let result = pathMatch(path, url, exact);
-
-    return <div>{result ? "True" : "False"}</div>;
+    return (
+      <>
+        <RouterConsumer>
+          {val => {
+            let { path, exact, Component, render } = this.getProps();
+            let mathchedOrNot = pathMatch(path, null, exact);
+            //return <div>{mathchedOrNot ? "True" : "False"}</div>;
+            if (mathchedOrNot) {
+              if (Component) {
+                return <Component {...val} />;
+              } else if (render) {
+                const Render = render;
+                return <Render {...val} />;
+              } else if (this.props.children) {
+                return this.props.children;
+              } else {
+                return <></>;
+              }
+            } else {
+              return <></>;
+            }
+          }}
+        </RouterConsumer>
+      </>
+    );
   }
 }
 

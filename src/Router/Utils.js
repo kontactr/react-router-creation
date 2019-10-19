@@ -2,6 +2,10 @@ export const getCurrentUrl = () => {
   return window.location.pathname;
 };
 
+export const getBrowserHistory = () => {
+  return window.history;
+};
+
 const __stringMatching = (regExCaSen = "", currentCaSen = "") => {
   let regEx = regExCaSen.toLowerCase();
   let current = currentCaSen.toLowerCase();
