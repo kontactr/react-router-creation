@@ -54,7 +54,7 @@ export const pollIntervalCheckingUrl = () => {
   let __thenUrl = getCurrentUrl();
   return () => {
     let q = __thenUrl === getCurrentUrl();
-    if (q) __thenUrl = getCurrentUrl();
+    if (!q) __thenUrl = getCurrentUrl();
     return q;
   };
 };
