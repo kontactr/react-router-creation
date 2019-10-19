@@ -1,9 +1,28 @@
 import React from "react";
 import RouterContext from "./RouterContext/RouterContext";
+import history from "./History/History";
 
 export default class Router extends React.Component {
+  getForceUpdate = () => {
+    this.forceUpdate();
+  };
+
   render() {
     const { RouterProvider } = RouterContext;
-    return <RouterProvider>{this.props.children}</RouterProvider>;
+
+    return (
+      <RouterProvider
+        value={{
+          history: history,
+          __notifyChange: this.getForceUpdate
+        }}
+      >
+        {this.props.children}
+      </RouterProvider>
+    );
   }
+
+  componentDidMount() {}
+
+  componentWillUnmount() {}
 }

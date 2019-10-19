@@ -1,8 +1,9 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
+import history from "../History/History";
 
-const __RouterContext = createContext({});
-
-console.log(__RouterContext, 5);
+const __RouterContext = createContext({
+  history: history
+});
 
 export default {
   RouterProvider: __RouterContext.Provider,
