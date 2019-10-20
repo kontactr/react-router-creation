@@ -37,10 +37,8 @@ const __attachListener = ({ type, callBack }) => {
   } else {
     return setInterval(() => {
       if (pollIntervalCheckingUrl()) {
-        console.log("YES");
         callBack();
       } else {
-        console.log("NO");
       }
     }, __POLL_CHECKING_INTERVAL);
   }
