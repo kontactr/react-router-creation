@@ -8,6 +8,7 @@ import { Route } from "./Router";
 import { Router } from "./Router";
 import MainNavigator from "./Components/MainNavigator";
 import BackToMainPage from "./Components/BackToMainPage";
+import RedirectionPage from "./Components/RedirectionPage";
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
           }}
         />
         <Route exact={true} path={"/profile"} Component={Profile} />
+        <Route
+          path={"/redirection/page"}
+          exact={true}
+          Component={RedirectionPage}
+        />
         <Route path={"/:id/"} exact={true} Component={BackToMainPage} />
       </Router>
     </div>

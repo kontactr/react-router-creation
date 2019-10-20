@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RouterContext from "./RouterContext/RouterContext";
-import { __IdentifyType, requestChange } from "./Listener";
+import { requestChange } from "./Listener";
 
 export default class Link extends React.Component {
   static propTypes = {
@@ -25,11 +25,11 @@ export default class Link extends React.Component {
   };
 
   render() {
-    let { to, title, data, className } = this.getProps();
     let { RouterConsumer } = RouterContext;
     return (
       <RouterConsumer>
         {context => {
+          let { to, title, data, className } = this.getProps();
           const { history, __notifyChange } = context;
           return (
             <a
