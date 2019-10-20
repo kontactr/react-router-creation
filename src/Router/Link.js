@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RouterContext from "./RouterContext/RouterContext";
+import { __IdentifyType, requestChange } from "./Listener";
 
 export default class Link extends React.Component {
   static propTypes = {
@@ -20,8 +21,7 @@ export default class Link extends React.Component {
 
   clickEventListenerHandler = (history, notifyChange, data) => {
     history.push(data);
-
-    notifyChange();
+    requestChange(notifyChange);
   };
 
   render() {

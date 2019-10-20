@@ -1,8 +1,15 @@
 import React from "react";
 import RouterContext from "./RouterContext/RouterContext";
 import history from "./History/History";
+import { uniqueID } from "./Utils";
+import REGISTRATION_HANDLER from "./Listener";
 
 export default class Router extends React.Component {
+  constructor(props) {
+    super(props);
+    this.__UNIQUE_ID = uniqueID();
+  }
+
   getForceUpdate = () => {
     this.forceUpdate();
   };
@@ -22,7 +29,14 @@ export default class Router extends React.Component {
     );
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    REGISTRATION_HANDLER.addListener({
+      routeId: this.__UNIQUE_ID,
+      callBack: this.getForceUpdate
+    });
+  }
 
-  componentWillUnmount() {}
+  componentWillUnmount() {
+    REGISTRATION_HANDLER.removeListener(this.__UNIQUE_ID);
+  }
 }

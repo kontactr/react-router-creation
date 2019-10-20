@@ -49,3 +49,9 @@ export const pathMatch = (compare, current, exact = false) => {
   current = current || getCurrentUrl() || "";
   return __pathMatching(compare, current, exact);
 };
+
+export const uniqueID = ((start = 0) => {
+  return () => {
+    return start++;
+  };
+})(0);
