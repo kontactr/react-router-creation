@@ -1,10 +1,15 @@
 import React from "react";
 import RouterContext from "./RouterContext/RouterContext";
 import history from "./History/History";
-import { pollIntervalCheckingUrl } from "./Utils";
-import { __SETINTERVAL_REGISTERED } from "./Constants";
+import { uniqueID } from "./Utils";
+import REGISTRATION_HANDLER from "./Listener";
 
 export default class Router extends React.Component {
+  constructor(props) {
+    super(props);
+    this.__UNIQUE_ID = uniqueID();
+  }
+
   getForceUpdate = () => {
     this.forceUpdate();
   };
@@ -25,48 +30,13 @@ export default class Router extends React.Component {
   }
 
   componentDidMount() {
-    if ("onpopstate" in window) {
-      window.addEventListener("popstate", this.getForceUpdate);
-    } else {
-      let {
-        getRegisterStatus,
-        setRegisterStatus,
-        incCounter,
-        setRegistrationId
-      } = __SETINTERVAL_REGISTERED;
-      incCounter();
-      if (getRegisterStatus()) {
-        return;
-      } else {
-        let intervalFunction = pollIntervalCheckingUrl();
-        let __ID = setInterval(
-          intervalFunction,
-          Router.__POLL_CHECKING_INTERVAL
-        );
-        setRegisterStatus(true);
-        setRegistrationId(__ID);
-      }
-    }
+    REGISTRATION_HANDLER.addListener({
+      routeId: this.__UNIQUE_ID,
+      callBack: this.getForceUpdate
+    });
   }
 
   componentWillUnmount() {
-    if ("onpopstate" in window) {
-      window.removeEventListener("popstate", this.getForceUpdate);
-    } else {
-      let {
-        decCounter,
-        getCounter,
-        setRegisterStatus,
-        getRegistrationId,
-        setRegistrationId
-      } = __SETINTERVAL_REGISTERED;
-      decCounter();
-      if (getCounter() < 1) {
-        clearInterval(getRegistrationId);
-        setRegisterStatus(false);
-        setRegistrationId(null);
-      } else {
-      }
-    }
+    REGISTRATION_HANDLER.removeListener(this.__UNIQUE_ID);
   }
 }

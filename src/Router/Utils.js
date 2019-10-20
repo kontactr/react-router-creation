@@ -50,11 +50,8 @@ export const pathMatch = (compare, current, exact = false) => {
   return __pathMatching(compare, current, exact);
 };
 
-export const pollIntervalCheckingUrl = () => {
-  let __thenUrl = getCurrentUrl();
+export const uniqueID = ((start = 0) => {
   return () => {
-    let q = __thenUrl === getCurrentUrl();
-    if (!q) __thenUrl = getCurrentUrl();
-    return q;
+    return start++;
   };
-};
+})(0);
