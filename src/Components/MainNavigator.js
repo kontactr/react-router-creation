@@ -13,6 +13,9 @@ export default class MainNavigator extends React.Component {
         <Link to={"/about"}>
           <div>About</div>
         </Link>
+        <Link to={"/promiseBased/route"}>
+          <div>Promise Based Component</div>
+        </Link>
       </>
     );
   }
