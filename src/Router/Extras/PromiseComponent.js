@@ -9,6 +9,8 @@ import {
 } from "../Constants";
 
 export default class PromiseComponent extends React.Component {
+  //TODO:: Function base support remaining
+
   state = {
     state: __PROMISE_PENDING,
     Component: <></>
