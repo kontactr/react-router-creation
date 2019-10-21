@@ -79,6 +79,18 @@ function App() {
             })
           }}
         />
+        <Route
+          path={"/promiseBased/route"}
+          exact={true}
+          promiseComponent={{
+            Component: new Promise((res, rej) => {
+              setTimeout(() => {
+                res(<div>Promise Based Component</div>);
+              }, 2000);
+            })
+          }}
+        />
+
       </Router>
     </div>
   );

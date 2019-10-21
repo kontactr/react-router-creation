@@ -6,6 +6,7 @@ import PromiseComponent from "./Extras/PromiseComponent";
 
 export default class Route extends React.Component {
   getProps = () => {
+
     let {
       path,
       render,
@@ -22,8 +23,10 @@ export default class Route extends React.Component {
       Component,
       exact,
       url,
+
       promiseComponent,
       meta
+
     };
   };
 
@@ -43,8 +46,10 @@ export default class Route extends React.Component {
               exact,
               Component,
               render,
+
               promiseComponent,
               meta
+
             } = this.getProps();
             let mathchedOrNot = pathMatch(path, null, exact);
             //return <div>{mathchedOrNot ? "True" : "False"}</div>;
