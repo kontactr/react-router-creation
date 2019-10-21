@@ -1,21 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { pathMatch } from "./Utils";
+import { pathMatch, setMetaHeaders } from "./Utils";
 import RouterContext from "./RouterContext/RouterContext";
 import PromiseComponent from "./Extras/PromiseComponent";
 
 export default class Route extends React.Component {
   getProps = () => {
-    let { path, render, Component, exact, url, promiseComponent } = this.props;
+
+    let {
+      path,
+      render,
+      Component,
+      exact,
+      url,
+      promiseComponent,
+      meta
+    } = this.props;
+
     return {
       path,
       render,
       Component,
       exact,
       url,
-      promiseComponent
+
+      promiseComponent,
+      meta
+
     };
   };
+
+  preRenderComponent(meta) {
+    setMetaHeaders(meta);
+  }
 
   render() {
     let { RouterConsumer } = RouterContext;
@@ -29,11 +46,16 @@ export default class Route extends React.Component {
               exact,
               Component,
               render,
-              promiseComponent
+
+              promiseComponent,
+              meta
+
             } = this.getProps();
             let mathchedOrNot = pathMatch(path, null, exact);
             //return <div>{mathchedOrNot ? "True" : "False"}</div>;
             if (mathchedOrNot) {
+              this.preRenderComponent(meta);
+
               if (Component) {
                 return <Component {...val} />;
               } else if (render) {

@@ -2,6 +2,15 @@ export const getCurrentUrl = () => {
   return window.location.pathname;
 };
 
+export const setMetaHeaders = metas => {
+  const { title } = metas || {};
+  if (title) document.title = title;
+};
+
+export const setWindowTitle = (title = "Application") => {
+  document.title = title;
+};
+
 export const getBrowserHistory = () => {
   return window.history;
 };
