@@ -29,7 +29,14 @@ function App() {
         >
           <MainNavigator />
         </Route>
-        <Route path={"/:id/"} exact={true} Component={BackToMainPage} />
+        <Route
+          path={"/:id/"}
+          exact={true}
+          Component={BackToMainPage}
+          meta={{
+            title: "Landing Page"
+          }}
+        />
         <Route
           exact={true}
           path={"/about"}
