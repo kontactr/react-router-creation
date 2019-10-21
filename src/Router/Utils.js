@@ -3,6 +3,7 @@ export const getCurrentUrl = () => {
 };
 
 export const setMetaHeaders = metas => {
+  //TODO: More meta support added
   const { title } = metas || {};
   if (title) document.title = title;
 };
